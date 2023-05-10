@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,9 +21,15 @@ class ExchangeApiClientTest {
     private String apiKey;
 
     @Test
-    void test() {
+    void convert() {
         ExchangeApiResponse exchangeRate = exchangeApiClient.getExchangeRate(apiKey, "KRW", 10);
         assertThat(exchangeRate.date()).isEqualTo(LocalDate.now());
+    }
+
+    @Test
+    void list() {
+        ExchangeRateListApiResponse response = exchangeApiClient.getExchangeRateList(apiKey, "USD", "KRW,JPY,PHP");
+        System.out.println(response);
     }
 
 }
