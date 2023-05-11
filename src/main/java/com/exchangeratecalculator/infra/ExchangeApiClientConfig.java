@@ -56,7 +56,7 @@ public class ExchangeApiClientConfig {
                 .client(new OkHttpClient())
                 .encoder(new JacksonEncoder(objectMapper))
                 .decoder(new JacksonDecoder(objectMapper))
-                .options(new Request.Options(3000, TimeUnit.MILLISECONDS, 10000, TimeUnit.MILLISECONDS, true))
+                .options(new Request.Options(5000, TimeUnit.MILLISECONDS, 10000, TimeUnit.MILLISECONDS, true))
                 // 0.1초 간격으로 시작해 최대 3초의 간격으로 3번 재시도
                 .retryer(new Retryer.Default(100, SECONDS.toMillis(3), 3))
                 .logger(new Slf4jLogger(ExchangeApiClient.class))
