@@ -3,10 +3,10 @@ package com.exchangeratecalculator.service;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GetExchangeRatesListService {
+public class ExchangeRatesService {
 
 
-    public void getExchangeRatesList(String currency) {
-        
+    public void getExchangeRates(String currency) {
+
     }
 }
