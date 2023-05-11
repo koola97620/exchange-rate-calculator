@@ -7,7 +7,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -28,7 +27,7 @@ class ExchangeApiClientTest {
 
     @Test
     void list() {
-        ExchangeRateListApiResponse response = exchangeApiClient.getExchangeRateList(apiKey, "USD", "KRW,JPY,PHP");
+        ExchangeRatesListApiResponse response = exchangeApiClient.getExchangeRateList(apiKey, "USD", "KRW,JPY,PHP");
         System.out.println(response);
     }
 
