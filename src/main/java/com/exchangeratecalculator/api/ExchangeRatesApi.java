@@ -15,7 +15,7 @@ public class ExchangeRatesApi {
         this.service = service;
     }
     @GetMapping("/api/exchangerates")
-    public ResponseEntity<?> getExchangeRates(@RequestParam String targetCountry) {
-        return ResponseEntity.ok(service.getExchangeRates(targetCountry));
+    public ResponseEntity<?> getExchangeRates(@RequestParam String targetCurrency) {
+        return ResponseEntity.ok(service.getExchangeRates(targetCurrency));
     }
 }
