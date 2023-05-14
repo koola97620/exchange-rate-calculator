@@ -38,7 +38,7 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="exchangeRate">환율</label>
                 <div class="col-sm-8">
-                    <p class="form-control-plaintext"><strong id="exchangeRate" th:text="${exchangeRate == null ? 0 : exchangeRate} + ' KRW/USD'"></strong></p>
+                    <p class="form-control-plaintext" id="exchangeRate"></p>
                 </div>
             </div>
 
@@ -47,10 +47,6 @@
                 <div class="col-sm-8">
                     <input type="number" id="remittanceAmount" class="form-control">
                 </div>
-            </div>
-
-            <div id="err-message" class="invalid-feedback">
-
             </div>
 
             <div class="form-group row">
@@ -64,6 +60,33 @@
 </div>
 
 <script type="text/javascript">
+
+    $('#submitButton').click(function () {
+        submitForm();
+    });
+
+    function submitForm(){
+        var remittanceAmountTag = $('#remittanceAmount');
+        var remittanceAmount = remittanceAmountTag.val();
+        var exchangeRateText = document.getElementById('exchangeRate').innerText;
+        var exchangeRate = exchangeRateText.split(' ')[0];
+        var currency = $('#selectCountry').val();
+
+        $.ajax({
+            url: "/api/exchangerates/remittance?exchangeRates=" + exchangeRate + "&amount=" + remittanceAmount,
+            type:"GET",
+            success : function (data) {
+                remittanceAmountTag.prop("class", "form-control");
+                $('#receivedAmount').html("<p>수취금액은 <strong>" + data + " "  + currency + "/USD</strong> 입니다.</p>");
+            },
+            error : function (response) {
+                console.log(response.responseText);
+                remittanceAmountTag.prop("class", "form-control is-invalid");
+                $('#receivedAmount').html("<p>"+ response.responseText + "</p>");
+            }
+        });
+    }
+
 
     $('#selectCountry').change(function () {
         var currency = $(this).val();
@@ -79,7 +102,7 @@
                 $('#exchangeRate').text(data + " " + currency + "/USD");
             },
             error : function (request) {
-                alert("ERROR! \n관리자에게 문의하세요.");
+                alert("통신 오류! \n관리자에게 문의하세요.")
             }
         });
     });
