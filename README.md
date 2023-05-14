@@ -2,7 +2,7 @@
 
 ## ApiKey 설정
 
-- application-local-apikey.properties 추가해야 실행가능
+- application-local-apikey.properties 추가하고 profile 을 local로 지정후 실행
 ```properties
 spring.config.activate.on-profile=local
 apiKey=사이트에서 발급받은 key 입력
