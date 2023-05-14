@@ -8,4 +8,7 @@ public record ExchangeRatesListApiResponse(
         LocalDate date,
         Map<String,Double> rates
 ) {
+    public Double exchangeRatesOfCountry(String targetCountry) {
+        return rates.get(targetCountry);
+    }
 }
